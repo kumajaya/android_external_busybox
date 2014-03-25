@@ -69,9 +69,10 @@
 #include "libbb.h"
 #include "reboot.h"
 
-#ifdef __BIONIC__
+//#ifdef __BIONIC__
 # include "android/reboot.c"
-#endif
+//#endif
+#include "android/android_reboot.c"
 
 #if ENABLE_FEATURE_WTMP
 #include <sys/utsname.h>
@@ -134,7 +135,7 @@ int halt_main(int argc UNUSED_PARAM, char **argv)
 	if (!(flags & 2)) /* no -n */
 		sync();
 
-#ifdef __BIONIC__
+//#ifdef __BIONIC__
 	char *mode[4];
 	int c = 1;
 	mode[0] = strdup("reboot");
@@ -148,16 +149,16 @@ int halt_main(int argc UNUSED_PARAM, char **argv)
 		break;
 	case 2:
 		//reboot
-		#ifdef CYANOGEN_LIBREBOOT
+		//#ifdef CYANOGEN_LIBREBOOT
 		if (argc > 1) {
 			mode[1] = strdup(argv[1]);
 			c = 2;
 		}
-		#endif
+		//#endif
 		break;
 	}
 	return reboot_main(c, mode);
-#endif
+//#endif
 
 	/* Perform action. */
 	rc = 1;

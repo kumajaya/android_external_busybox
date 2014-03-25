@@ -91,7 +91,7 @@ BUSYBOX_SRC_FILES = \
 
 BUSYBOX_ASM_FILES =
 ifneq ($(BIONIC_L),true)
-    BUSYBOX_ASM_FILES += swapon.S swapoff.S sysinfo.S
+    BUSYBOX_ASM_FILES += swapon.S swapoff.S sysinfo.S __reboot.S
 endif
 
 ifneq ($(filter arm x86 mips,$(TARGET_ARCH)),)
